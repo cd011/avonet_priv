@@ -4,6 +4,7 @@ import { FinancialRecordList } from "./financial-record-list";
 import "./financial-record.css";
 import { useFinancialRecords } from "../../contexts/financial-record-context";
 import { useMemo } from "react";
+import { ExpenceLimit } from "./expence-limit";
 export const Homepage = () => {
   const { user } = useUser();
   const { records } = useFinancialRecords();
@@ -20,9 +21,10 @@ export const Homepage = () => {
   return (
     <div className="homepage-container">
       <h1> Welcome {user?.firstName}! Here Are Your Finances:</h1>
-      <div>Total Monthly: ${totalMonthly}</div>
+      <div>Total Monthly: Rs.{totalMonthly}</div>
       <FinancialRecordList />
       <FinancialRecordForm />
+      {/* <ExpenceLimit /> */}
     </div>
   );
 };

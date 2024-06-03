@@ -1,4 +1,4 @@
-import { ExpensePie } from "./expensePie";
+import { ExpensePie } from "./expensePie.tsx";
 
 export const Dashboard = () => {
   return (
