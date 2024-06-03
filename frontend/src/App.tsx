@@ -4,6 +4,7 @@ import { Homepage } from "./pages/homepage";
 import { Dashboard } from "./pages/dashboard";
 import { Auth } from "./pages/auth";
 import { FinancialRecordsProvider } from "./contexts/financial-record-context";
+import { ExpenceLimitProvider } from "./contexts/expence-limit-context";
 import { SignedIn, UserButton } from "@clerk/clerk-react";
 
 function App() {
@@ -22,7 +23,9 @@ function App() {
             path="/"
             element={
               <FinancialRecordsProvider>
-                <Homepage />
+                <ExpenceLimitProvider>
+                  <Homepage />
+                </ExpenceLimitProvider>
               </FinancialRecordsProvider>
             }
           />
