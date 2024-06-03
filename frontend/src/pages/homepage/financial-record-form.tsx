@@ -78,7 +78,7 @@ export const FinancialRecordForm = () => {
             <option value="">Select a Type</option>
             <option value="Food">Food</option>
             <option value="Rent">Rent</option>
-            <option value="Salary">Travel</option>
+            <option value="Travel">Travel</option>
             <option value="Utilities">Utilities</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Other">Other</option>
