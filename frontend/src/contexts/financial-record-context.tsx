@@ -7,7 +7,7 @@ export interface FinancialRecord {
   date: Date;
   description: string;
   amount: number;
-  category: string;
+  type: string;
   paymentMethod: string;
 }
 
@@ -61,7 +61,9 @@ export const FinancialRecordsProvider = ({
         const newRecord = await response.json();
         setRecords((prev) => [...prev, newRecord]);
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log("add record error");
+    }
   };
 
   const updateRecord = async (id: string, newRecord: FinancialRecord) => {
@@ -89,7 +91,9 @@ export const FinancialRecordsProvider = ({
           })
         );
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log("edit record error");
+    }
   };
 
   const deleteRecord = async (id: string) => {
@@ -107,7 +111,9 @@ export const FinancialRecordsProvider = ({
           prev.filter((record) => record._id !== deletedRecord._id)
         );
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log("delete record error");
+    }
   };
 
   return (
@@ -125,9 +131,7 @@ export const useFinancialRecords = () => {
   );
 
   if (!context) {
-    throw new Error(
-      "useFinancialRecords must be used within a FinancialRecordsProvider"
-    );
+    throw new Error("only inside FinancialRecordsProvider");
   }
 
   return context;

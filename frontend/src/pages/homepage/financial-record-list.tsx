@@ -20,7 +20,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(initialValue);
 
-  const onBlur = () => {
+  const foucsCell = () => {
     setIsEditing(false);
     updateRecord(row.index, column.id, value);
   };
@@ -35,7 +35,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           autoFocus
-          onBlur={onBlur}
+          onBlur={foucsCell}
           style={{ width: "100%" }}
         />
       ) : typeof value === "string" ? (
@@ -80,8 +80,8 @@ export const FinancialRecordList = () => {
         ),
       },
       {
-        Header: "Category",
-        accessor: "category",
+        Header: "Type",
+        accessor: "type",
         Cell: (props) => (
           <EditableCell
             {...props}

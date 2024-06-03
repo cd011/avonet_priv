@@ -5,7 +5,7 @@ interface FinancialRecord {
   date: Date;
   description: string;
   amount: number;
-  category: string;
+  type: string;
   paymentMethod: string;
 }
 
@@ -14,7 +14,7 @@ const financialRecordSchema = new mongoose.Schema<FinancialRecord>({
   date: { type: Date, required: true },
   description: { type: String, required: true },
   amount: { type: Number, required: true },
-  category: { type: String, required: true },
+  type: { type: String, required: true },
   paymentMethod: { type: String, required: true },
 });
 

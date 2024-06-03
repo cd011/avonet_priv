@@ -10,7 +10,7 @@ export const Auth = () => {
   return (
     <div className="sign-in-container">
       <SignedOut>
-        <h1> Welcome to Your Own Personal Finance Tracker!</h1>
+        <h1>Personal Expense Tracking App</h1>
         <SignUpButton mode="modal" />
         <SignInButton mode="modal" />
       </SignedOut>

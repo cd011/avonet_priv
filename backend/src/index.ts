@@ -14,8 +14,8 @@ const mongoURI: string =
 
 mongoose
   .connect(mongoURI)
-  .then(() => console.log("CONNECTED TO MONGODB!"))
-  .catch((err) => console.error("Failed to Connect to MongoDB:", err));
+  .then(() => console.log("connected to database"))
+  .catch((err) => console.error("database connection failed:", err));
 
 app.use("/financial-records", financialRecordRouter);
 

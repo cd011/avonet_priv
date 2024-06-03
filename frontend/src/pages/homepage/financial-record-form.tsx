@@ -4,8 +4,9 @@ import { useFinancialRecords } from "../../contexts/financial-record-context";
 
 export const FinancialRecordForm = () => {
   const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [type, setType] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const { addRecord } = useFinancialRecords();
 
@@ -14,19 +15,22 @@ export const FinancialRecordForm = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const stdDate = new Date(date);
+
     const newRecord = {
       userId: user?.id ?? "",
-      date: new Date(),
+      date: stdDate,
       description: description,
       amount: parseFloat(amount),
-      category: category,
+      type: type,
       paymentMethod: paymentMethod,
     };
 
     addRecord(newRecord);
     setDescription("");
+    setDate("");
     setAmount("");
-    setCategory("");
+    setType("");
     setPaymentMethod("");
   };
 
@@ -54,17 +58,27 @@ export const FinancialRecordForm = () => {
           />
         </div>
         <div className="form-field">
-          <label>Category:</label>
+          <label>Date:</label>
+          <input
+            type="date"
+            required
+            className="input"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+        <div className="form-field">
+          <label>Type:</label>
           <select
             required
             className="input"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={type}
+            onChange={(e) => setType(e.target.value)}
           >
-            <option value="">Select a Category</option>
+            <option value="">Select a Type</option>
             <option value="Food">Food</option>
             <option value="Rent">Rent</option>
-            <option value="Salary">Salary</option>
+            <option value="Salary">Travel</option>
             <option value="Utilities">Utilities</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Other">Other</option>
