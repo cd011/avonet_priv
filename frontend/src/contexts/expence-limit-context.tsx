@@ -41,25 +41,35 @@ export const ExpenceLimitProvider = ({
   };
 
   useEffect(() => {
-    fetchRecords();
+    if (user) {
+      fetchRecords();
+    }
   }, [user]);
 
   const addRecord = async (record: ExpenceLimit) => {
-    const response = await fetch("http://localhost:3001/expence-limits", {
-      method: "POST",
-      body: JSON.stringify(record),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (!user) return;
 
-    try {
-      if (response.ok) {
-        const newRecord = await response.json();
-        setRecords((prev) => [...prev, newRecord]);
+    const existingRecord = records.find((r) => r.userId === user.id);
+
+    if (existingRecord) {
+      await updateRecord(existingRecord._id as string, record);
+    } else {
+      const response = await fetch("http://localhost:3001/expence-limits", {
+        method: "POST",
+        body: JSON.stringify({ ...record, userId: user.id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      try {
+        if (response.ok) {
+          const newRecord = await response.json();
+          setRecords((prev) => [...prev, newRecord]);
+        }
+      } catch (err) {
+        console.log("add record error");
       }
-    } catch (err) {
-      console.log("add record error");
     }
   };
 
@@ -74,15 +84,9 @@ export const ExpenceLimitProvider = ({
 
     try {
       if (response.ok) {
-        const newRecord = await response.json();
+        const updatedRecord = await response.json();
         setRecords((prev) =>
-          prev.map((record) => {
-            if (record._id === id) {
-              return newRecord;
-            } else {
-              return record;
-            }
-          })
+          prev.map((record) => (record._id === id ? updatedRecord : record))
         );
       }
     } catch (err) {

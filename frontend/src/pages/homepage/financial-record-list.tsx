@@ -69,7 +69,7 @@ export const FinancialRecordList = () => {
         ),
       },
       {
-        Header: "Amount",
+        Header: "Amount (LKR)",
         accessor: "amount",
         Cell: (props) => (
           <EditableCell

@@ -13,7 +13,6 @@ function App() {
       <div className="app-container">
         <div className="navbar">
           <Link to="/"> Homepage</Link>
-          <Link to="/dash"> Dashboard</Link>
           <SignedIn>
             <UserButton />
           </SignedIn>

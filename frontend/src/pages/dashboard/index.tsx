@@ -4,7 +4,6 @@ export const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h2>Dash</h2>
-      <PieChart />
     </div>
   );
 };

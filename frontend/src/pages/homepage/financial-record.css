@@ -1,24 +1,24 @@
-/* Centered container for the app */
 .homepage-container {
   width: 80%;
 }
 
-/* General styling for headers within the app */
-h1,
-h2 {
+h1 {
   color: #2c3e50;
   text-align: center;
 }
 
-/* Form and list container */
+h2 {
+  color: #2c3e50;
+  text-align: left;
+}
+
 .form-container,
 .list-container {
   margin-bottom: 20px;
 }
 
-/* Common class for all buttons */
 .button {
-  background-color: #3498db;
+  background-color: #724184;
   color: #ffffff;
   border: none;
   padding: 8px 15px;
@@ -29,10 +29,10 @@ h2 {
 }
 
 .button:hover {
-  background-color: #2980b9;
+  background-color: #a629b9;
 }
 .button-delete {
-  background-color: #343cdb;
+  background-color: #b434db;
   color: #ffffff;
   border: none;
   padding: 8px 15px;
@@ -43,7 +43,7 @@ h2 {
 }
 
 .button-delete:hover {
-  background-color: #343cdb;
+  background-color: #db34cd;
 }
 
 /* Common class for all input fields and selects */
@@ -55,7 +55,7 @@ h2 {
   background-color: transparent;
   border: 1px solid #ccc;
   border-radius: 5px;
-  color: #3498db;
+  color: #d834db;
 }
 
 /* Labels for better readability */
@@ -85,7 +85,7 @@ label {
 }
 
 .table th {
-  background-color: #3498db; /* Darker blue header background */
+  background-color: #724184; /* Darker blue header background */
   color: white;
   font-size: 16px;
 }
@@ -96,4 +96,44 @@ label {
 
 .table tbody tr:hover {
   background-color: #e8f4f8; /* Light blue hover effect for rows */
+}
+
+/* .alert {
+  background-color: #6ac311;
+  color: #000;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: bold;
+} */
+
+/* Expenses info section */
+.expenses-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.current-expenses,
+.monthly-limit,
+.alert {
+  padding: 10px;
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+}
+.current-expenses {
+  background-color: #e3f2fd;
+  color: #11a7e2;
+}
+.monthly-limit {
+  background-color: #fce4ec;
+  color: #20ab23;
+}
+.alert {
+  background-color: #c23b3b;
+  color: #ffffff;
+  font-weight: bold;
 }
