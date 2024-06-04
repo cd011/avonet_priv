@@ -40,6 +40,7 @@ export const FinancialRecordForm = () => {
         <div className="form-field">
           <label>Description:</label>
           <input
+            placeholder="Describe the expense"
             type="text"
             required
             className="input"
@@ -50,6 +51,7 @@ export const FinancialRecordForm = () => {
         <div className="form-field">
           <label>Amount:</label>
           <input
+            placeholder="Enter the amount in LKR"
             type="number"
             required
             className="input"

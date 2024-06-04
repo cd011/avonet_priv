@@ -1,4 +1,4 @@
-import { PieChart } from "./expensePie.tsx";
+// import { PieChart } from "./expensePie.tsx";
 
 export const Dashboard = () => {
   return (

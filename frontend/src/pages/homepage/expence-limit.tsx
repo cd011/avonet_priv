@@ -30,6 +30,7 @@ export const ExpenceLimit = () => {
         <div className="form-field">
           <label>Amount:</label>
           <input
+            placeholder="Enter the amount in LKR"
             type="number"
             required
             className="input"
