@@ -3,7 +3,6 @@ import { useUser } from "@clerk/clerk-react";
 import { useExpenceLimit } from "../../contexts/expence-limit-context";
 
 export const ExpenceLimit = () => {
-  const [date, setDate] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
 
   const { addRecord } = useExpenceLimit();
@@ -13,18 +12,15 @@ export const ExpenceLimit = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const stdDate = new Date(date);
-
     const newRecord = {
       userId: user?.id ?? "",
-      date: stdDate,
+      date: new Date(),
 
       amount: parseFloat(amount),
     };
 
     addRecord(newRecord);
 
-    setDate("");
     setAmount("");
   };
 
@@ -39,16 +35,6 @@ export const ExpenceLimit = () => {
             className="input"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
-        <div className="form-field">
-          <label>Date:</label>
-          <input
-            type="date"
-            required
-            className="input"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
           />
         </div>
 

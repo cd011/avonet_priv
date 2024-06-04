@@ -3,7 +3,7 @@ import {
   FinancialRecord,
   useFinancialRecords,
 } from "../../contexts/financial-record-context";
-import { useTable, Column, CellProps, Row } from "react-table";
+import { useTable, Column, CellProps } from "react-table";
 
 interface EditableCellProps extends CellProps<FinancialRecord> {
   updateRecord: (rowIndex: number, columnId: string, value: any) => void;
@@ -20,9 +20,18 @@ const EditableCell: React.FC<EditableCellProps> = ({
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(initialValue);
 
-  const foucsCell = () => {
+  const focusCell = () => {
     setIsEditing(false);
     updateRecord(row.index, column.id, value);
+  };
+
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   return (
@@ -35,13 +44,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           autoFocus
-          onBlur={foucsCell}
+          onBlur={focusCell}
           style={{ width: "100%" }}
         />
-      ) : typeof value === "string" ? (
-        value
+      ) : column.id === "date" ? (
+        formatDate(value)
       ) : (
-        value.toString()
+        value
       )}
     </div>
   );
@@ -49,11 +58,32 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
 export const FinancialRecordList = () => {
   const { records, updateRecord, deleteRecord } = useFinancialRecords();
+  const [filter, setFilter] = useState("");
 
   const updateCellRecord = (rowIndex: number, columnId: string, value: any) => {
     const id = records[rowIndex]?._id;
     updateRecord(id ?? "", { ...records[rowIndex], [columnId]: value });
   };
+
+  const filteredRecords = useMemo(() => {
+    return records.filter((record) => {
+      const searchTerm = filter.toLowerCase();
+      return record.type.toLowerCase().includes(searchTerm);
+
+      // const date = new Date(record.date).toLocaleDateString(undefined, {
+      //   year: "numeric",
+      //   month: "2-digit",
+      //   day: "2-digit",
+      // });
+      // return (
+      //   record.description.toLowerCase().includes(searchTerm) ||
+      //   record.type.toLowerCase().includes(searchTerm) ||
+      // return record.type.toLowerCase().includes(searchTerm);
+      //   record.paymentMethod.toLowerCase().includes(searchTerm) ||
+      //   date.includes(searchTerm)
+      // );
+    });
+  }, [records, filter]);
 
   const columns: Array<Column<FinancialRecord>> = useMemo(
     () => [
@@ -131,10 +161,17 @@ export const FinancialRecordList = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,
-      data: records,
+      data: filteredRecords,
     });
+
   return (
     <div className="table-container">
+      <input
+        type="text"
+        placeholder="Filter by type"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
       <table {...getTableProps()} className="table">
         <thead>
           {headerGroups.map((hg) => (
@@ -146,7 +183,7 @@ export const FinancialRecordList = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, idx) => {
+          {rows.map((row) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>

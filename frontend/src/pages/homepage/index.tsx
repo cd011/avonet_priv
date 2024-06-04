@@ -37,10 +37,10 @@ export const Homepage = () => {
 
   return (
     <div className="homepage-container">
-      <h1>Welcome {user?.firstName}! Here Are Your Expenses</h1>
+      <h1>{user?.firstName}'s Personal Expense Tracking App</h1>
       <div className="expenses-info">
         <div className="current-expenses">
-          Current total expenses: LKR {totalMonthly}
+          Current monthly expenses: LKR {totalMonthly}
         </div>
         {expenceLimit.length > 0 && (
           <div className="monthly-limit">Monthly Limit: LKR {monthlyLimit}</div>
@@ -51,6 +51,7 @@ export const Homepage = () => {
           </div>
         )}
       </div>
+      <br></br>
       <PieChart expanceData={records} />
       <br></br>
       <h2>Your expenses table:</h2>
@@ -59,7 +60,7 @@ export const Homepage = () => {
       <h2>Add an expense:</h2>
       <FinancialRecordForm />
       <br></br>
-      <h2>Add your expense limit:</h2>
+      <h2>Add your monthly expense limit:</h2>
       <ExpenceLimit />
     </div>
   );
